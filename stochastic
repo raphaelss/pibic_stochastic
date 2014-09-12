@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+totalDur="$1"
+meanSecDur="$2"
+meanSecDens="$3"
+shift 3
+series="'($@)"
+sbcl --noinform --load stochastic.lisp --eval \
+    "(progn
+       (setf *random-state* (make-random-state t))
+       (stochastic::run $totalDur $meanSecDur $meanSecDens $series) \
+       (quit))"
