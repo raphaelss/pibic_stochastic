@@ -1,4 +1,5 @@
 import random
+import sys
 
 def transpose(s, n):
     for i in range(len(s)):
@@ -54,13 +55,17 @@ def make_dur_list(target_dur, mean):
         t = t + dur
     return dur_list
 
-total_dur = 360
-mean_sec_dur = 50
-mean_sec_dens = 10
-series = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-min_n = 1
-max_n = 6
-
+if len(sys.argv) <  7:
+    exit()
+total_dur = float(sys.argv[1])
+mean_sec_dur = float(sys.argv[2])
+mean_sec_dens = float(sys.argv[3])
+min_n = int(sys.argv[4])
+max_n = int(sys.argv[5])
+series = []
+for i in sys.argv[6:]:
+    series.append(int(i))
+print(series)
 sections = make_dur_list(total_dur, mean_sec_dur)
 sh = series_handler(series, min_n, max_n)
 n = 1
