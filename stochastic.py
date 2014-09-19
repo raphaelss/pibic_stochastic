@@ -44,7 +44,7 @@ class series_handler:
                 self.i = 0
             pitches.append(self.series[self.i])
             self.i = self.i + 1
-        return pitches
+        return list(set(pitches))
 
 def make_dur_list(target_dur, mean):
     t = 0
@@ -70,10 +70,10 @@ sections = make_dur_list(total_dur, mean_sec_dur)
 sh = series_handler(series, min_n, max_n)
 n = 1
 for sec in sections:
-    print("SEÇÃO {} - dur {}:".format(n, sec))
     events = make_dur_list(sec, sec / mean_sec_dens)
+    print("SEÇÃO {} - dur {:.2f}:".format(n, sum(events)))
     for ev in events:
         chord = sh.get_pitches()
-        print("- Duração: {}; acorde: {}".format(ev, chord))
+        print("- Duração: {:.2f}; acorde: {}".format(ev, chord))
     print("\n---\n")
     n = n + 1
